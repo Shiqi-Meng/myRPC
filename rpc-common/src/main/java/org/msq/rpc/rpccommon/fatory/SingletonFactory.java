@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 单例对象工厂类
  */
-public class SingletonFactory {
+public final class SingletonFactory {
 
     private static final Map<String, Object> OBJECT_MAP = new ConcurrentHashMap<>();
 

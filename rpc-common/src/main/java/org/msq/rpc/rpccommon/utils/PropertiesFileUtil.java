@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 @Slf4j
-public class PropertiesFileUtil {
+public final class PropertiesFileUtil {
     private PropertiesFileUtil() {
     }
 

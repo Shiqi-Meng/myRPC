@@ -19,7 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * @param <T>
  */
 @Slf4j
-public class ExtensionLoader<T> {
+public final class ExtensionLoader<T> {
 
     private static final String SERVICE_DIRECTORY = "META-INF/extensions/";
     private static final Map<Class<?>, ExtensionLoader<?>> EXTENSION_LOADERS = new ConcurrentHashMap<>();

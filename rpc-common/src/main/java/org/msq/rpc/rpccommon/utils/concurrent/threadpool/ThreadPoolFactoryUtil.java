@@ -10,7 +10,7 @@ import java.util.concurrent.*;
  * 创建线程池的工具类
  */
 @Slf4j
-public class ThreadPoolFactoryUtil {
+public final class ThreadPoolFactoryUtil {
 
     /**
      * 通过 threadNamePrefix 来区分不同线程池（我们可以把相同 threadNamePrefix 的线程池看作是为同一业务场景服务）。
