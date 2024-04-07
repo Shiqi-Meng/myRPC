@@ -50,6 +50,7 @@ public final class CuratorUtils {
      */
     public static void createPersistentNode(CuratorFramework zkClient, String path) {
         // path: serviceName + address
+        log.info("the path is:[{}]", path);
         path = ZK_REGISTER_ROOT_PATH + "/" + path;
         try {
             if (REGISTERED_PATH_SET.contains(path) || zkClient.checkExists().forPath(path) != null) {
