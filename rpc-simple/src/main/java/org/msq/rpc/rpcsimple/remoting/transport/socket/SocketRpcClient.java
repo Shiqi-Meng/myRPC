@@ -13,6 +13,9 @@ import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+/**
+ * socket 编写的rpc客户端，发现服务并向服务端发送RpcRequest
+ */
 public class SocketRpcClient implements RpcRequestTransport {
 
     private final ServiceDiscovery serviceDiscovery;
