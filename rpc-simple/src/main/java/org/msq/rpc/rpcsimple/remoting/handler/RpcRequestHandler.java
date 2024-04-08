@@ -22,7 +22,7 @@ public class RpcRequestHandler {
         serviceProvider = SingletonFactory.getInstance(ZkServiceProviderImpl.class);
     }
 
-    public Object handler(RpcRequest rpcRequest) {
+    public Object handle(RpcRequest rpcRequest) {
         Object service = serviceProvider.getService(rpcRequest.getRpcServiceName());
         return invokeTargetMethod(rpcRequest, service);
     }

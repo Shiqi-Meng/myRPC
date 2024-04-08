@@ -73,6 +73,7 @@ public class NettyRpcClient implements RpcRequestTransport {
                 throw new IllegalStateException();
             }
         });
+        // TODO 不要在主线程使用get方法，这是在哪个线程？
         return completableFuture.get();
     }
 
@@ -82,6 +83,7 @@ public class NettyRpcClient implements RpcRequestTransport {
         InetSocketAddress inetSocketAddress = serviceDiscovery.lookupService(rpcRequest);
         Channel channel = getChannel(inetSocketAddress);
         if (channel.isActive()) {
+            // TODO 什么时候调用的complete？
             unprocessedRequests.put(rpcRequest.getRequestId(), resultFuture);
             RpcMessage rpcMessage = RpcMessage.builder()
                     .data(rpcRequest)
