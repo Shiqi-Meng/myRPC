@@ -10,6 +10,7 @@ import org.msq.rpc.rpcsimple.annotation.RpcService;
 import org.msq.rpc.rpcsimple.config.RpcServiceConfig;
 import org.msq.rpc.rpcsimple.provider.ServiceProvider;
 import org.msq.rpc.rpcsimple.provider.impl.ZkServiceProviderImpl;
+import org.msq.rpc.rpcsimple.proxy.RpcClientProxy;
 import org.msq.rpc.rpcsimple.remoting.transport.RpcRequestTransport;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -51,19 +52,19 @@ public class SpringBeanPostProcessor implements BeanPostProcessor {
         Field[] declaredFields = targetClass.getDeclaredFields();
         for (Field declaredField : declaredFields) {
             RpcReference rpcReference = declaredField.getAnnotation(RpcReference.class);
-//            if (rpcReference != null) {
-//                RpcServiceConfig rpcServiceConfig = RpcServiceConfig.builder()
-//                        .group(rpcReference.group())
-//                        .version(rpcReference.version()).build();
-//                RpcClientProxy rpcClientProxy = new RpcClientProxy(rpcClient, rpcServiceConfig);
-//                Object clientProxy = rpcClientProxy.getProxy(declaredField.getType());
-//                declaredField.setAccessible(true);
-//                try {
-//                    declaredField.set(bean, clientProxy);
-//                } catch (IllegalAccessException e) {
-//                    e.printStackTrace();
-//                }
-//            }
+            if (rpcReference != null) {
+                RpcServiceConfig rpcServiceConfig = RpcServiceConfig.builder()
+                        .group(rpcReference.group())
+                        .version(rpcReference.version()).build();
+                RpcClientProxy rpcClientProxy = new RpcClientProxy(rpcClient, rpcServiceConfig);
+                Object clientProxy = rpcClientProxy.getProxy(declaredField.getType());
+                declaredField.setAccessible(true);
+                try {
+                    declaredField.set(bean, clientProxy);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return bean;
     }
